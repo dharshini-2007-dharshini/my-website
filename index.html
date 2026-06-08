@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For(person)...🤍🐒</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:linear-gradient(135deg,#1a1a2e,#2a1b3d);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* chat box */
+.chat-box{
+width:90%;
+max-width:420px;
+height:80vh;
+background:rgba(0,0,0,0.25);
+border-radius:20px;
+padding:15px;
+overflow-y:auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+}
+
+/* message bubble */
+.msg{
+padding:10px 14px;
+margin:8px 0;
+border-radius:18px;
+width:fit-content;
+max-width:80%;
+font-size:15px;
+animation:pop 0.3s ease;
+}
+
+.left{
+background:#2c2c3e;
+color:#fff;
+border-bottom-left-radius:4px;
+}
+
+.right{
+background:#ff4f9a;
+color:white;
+margin-left:auto;
+border-bottom-right-radius:4px;
+}
+
+/* buttons */
+.btn-box{
+display:flex;
+justify-content:center;
+margin-top:10px;
+gap:10px;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:25px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#yes{
+background:#ff4f9a;
+color:white;
+}
+
+#no{
+background:#444;
+color:white;
+position:relative;
+}
+
+/* emoji float */
+.emoji{
+position:absolute;
+font-size:22px;
+animation:floatUp 6s linear forwards;
+opacity:0.8;
+filter:brightness(0.8);
+}
+
+@keyframes floatUp{
+from{transform:translateY(100vh);}
+to{transform:translateY(-120px);opacity:0;}
+}
+
+@keyframes pop{
+from{transform:scale(0.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-box" id="chat"></div>
+
+<div class="btn-box">
+<button id="yes">YES 🙈</button>
+<button id="no">NO 🤌🏻</button>
+</div>
+
+<script>
+
+const chat=document.getElementById("chat");
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+
+/* chat messages */
+const messages=[
+"Hey loose...🤍",
+"1000  panam pottu vidu",
+"🌙💗 ",
+"en thangoo la please😘🫂"
+];
+
+let i=0;
+
+function addMessage(){
+if(i < messages.length){
+
+let msg=document.createElement("div");
+msg.classList.add("msg","left");
+msg.innerText=messages[i];
+
+chat.appendChild(msg);
+chat.scrollTop=chat.scrollHeight;
+
+i++;
+setTimeout(addMessage,1500);
+}
+}
+addMessage();
+
+/* YES */
+yes.onclick=()=>{
+
+let msg=document.createElement("div");
+msg.classList.add("msg","right");
+msg.innerText="YES 💗";
+
+chat.appendChild(msg);
+
+setTimeout(()=>{
+let reply=document.createElement("div");
+reply.classList.add("msg","left");
+reply.innerText="Intha number 7639786549 |  💜🌷..";
+chat.appendChild(reply);
+chat.scrollTop=chat.scrollHeight;
+},800);
+
+};
+
+/* NO move */
+no.addEventListener("mouseover",()=>{
+no.style.position="absolute";
+no.style.left=Math.random()*(window.innerWidth-100)+"px";
+no.style.top=Math.random()*(window.innerHeight-100)+"px";
+});
+
+/* floating emojis */
+const emojis=["❤️","💜","🖤","💙","✨","🌙","🌹","💔","😘"];
+
+function spawnEmoji(){
+let e=document.createElement("div");
+e.classList.add("emoji");
+e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+e.style.left=Math.random()*100+"vw";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),6000);
+}
+
+setInterval(spawnEmoji,400);
+
+</script>
+
+</body>
+</html>
